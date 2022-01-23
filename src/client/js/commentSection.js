@@ -22,6 +22,7 @@ const addComment = (text, id) => {
 	const videoComments = document.querySelector(".video__comments ul");
 	const newComment = document.createElement("li");
 	newComment.className = "video__comment";
+	// insert data set in fake comment tag
 	newComment.setAttribute("data-commentId", id);
 	const icon = document.createElement("i");
 	icon.className = "fas fa-comment";
@@ -30,6 +31,7 @@ const addComment = (text, id) => {
 	const button = document.createElement("button");
 	button.id = "commentDelete";
 	button.innerText = "❌";
+	// before sync, need eventlistener
 	button.addEventListener("click", handleClickDelete);
 	newComment.appendChild(icon);
 	newComment.appendChild(span);
@@ -45,7 +47,6 @@ const handleSubmit = async (event) => {
 	if (text === "") {
 		return;
 	}
-	// status = fetch-promise.status
 	const response = await fetch(`/api/videos/${videoId}/comment`, {
 		method: "POST",
 		headers: {
@@ -53,22 +54,20 @@ const handleSubmit = async (event) => {
 		},
 		body: JSON.stringify({ text }),
 	}); // fetch :: send request to backend
-	// fetch 로 백엔드에 request 해서 data 가 돌아오는데 시간이 걸리기 때문에 await 을 해주는게 좋다.
 	const { status } = response;
-	const result = await response.json();
+	const result = await response.json(); // fetch promise need await
 	if (status === 201) {
 		addComment(text, result.id);
 	}
 	textarea.value = "";
 };
-// fetch 만 하면 쿠키는 자동으로 브라우저에 전송되고 백엔드에서 사용할 수 있음
 
 if (form) {
-	// login 을 해야 form 이 생성됨
+	// if login ?
+	// better than click event
 	form.addEventListener("submit", handleSubmit);
-	// delete Btn don't exists
+	// need loop adding eventlistener for all btns
 	for (const btn of deleteBtns) {
 		btn.addEventListener("click", handleClickDelete);
 	}
 }
-// btn click event 대신에 form 에 submit event 를 감지하는 것이 더 좋다.
