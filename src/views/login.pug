@@ -1,0 +1,15 @@
+extends base 
+
+block content 
+    if errorMessages
+        each errorMessage in errorMessages
+            p=errorMessage
+    form(method="POST")
+        input(type="text", name="userId", placeholder="ID")
+        input(type="password", name="password", placeholder="PASSWORD")
+        input(type="submit", value="LOGIN")
+        include partials/social-login
+        div.auth-switch
+            span Don't have an account?  
+            a(href="/join") Create account now &rarr;
+    

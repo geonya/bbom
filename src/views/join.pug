@@ -1,0 +1,20 @@
+extends base 
+
+block content 
+    if errorMessages
+        each errorMessage in errorMessages
+            p=errorMessage
+    form(method="POST", enctype="multipart/form-data")
+        label(for="avatar") Avatar
+        input(type="file", id="avatar", name="avatar", accept="image/*")
+        input(type="text", name="userId", placeholder="ID")
+        input(type="text", name="name", placeholder="NAME")
+        input(type="email", name="email", placeholder="E-MAIL")
+        input(type="password", name="password", placeholder="PASSWORD")
+        input(type="password", name="password2", placeholder="PASSWORD CONFIRM")
+        input(type="text", name="location", placeholder="LOCATION")
+        input(type="submit", value="Create Account")
+        include partials/social-login
+        div.auth-switch
+            span Already Have an Account? 
+            a(href="/login") Log in now &rarr;

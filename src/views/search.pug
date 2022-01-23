@@ -1,0 +1,13 @@
+extends base
+include mixins/video
+
+block content
+
+    form(method="GET")
+        input(type="text", name="keyword", placeholder="Searching by video title",requried)
+        input(type="submit", value="Search Video")
+    hr
+    if errorMessage
+        span=errorMessage
+    each video in videos
+        +video(video)

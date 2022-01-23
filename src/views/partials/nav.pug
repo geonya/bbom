@@ -1,0 +1,20 @@
+nav
+    a(href="/").header__logo
+            i.fab.fa-youtube 
+            span=siteName
+    ul 
+        if !loggedIn
+            li#login
+                a(href="/login") login
+            li 
+                a(href="/join") join
+        else
+            li
+                a(href="/search")
+            li 
+                a(href="/videos/upload") Upload Video
+            li
+                a(href=`/users/${loggedInUser._id}`) Profile
+                    img.header__avatar(src=loggedInUser.avatarUrl)
+            li#logout
+                a(href=`/logout`) Log Out

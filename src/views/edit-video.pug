@@ -1,0 +1,12 @@
+extends base
+
+block content
+    if errorMessage
+        ul
+        each error in errorMessage
+            li=error
+    form(method="POST")
+        input(type="text", name="title", value=`${video.title}`)
+        input(type="text", name="description", value=`${video.description}`)
+        input(type="text", name="hashtags", value=`${video.hashtags}`)
+        input(type="submit", value="Edit Video")
