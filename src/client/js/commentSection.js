@@ -5,15 +5,11 @@ const deleteBtns = document.querySelectorAll("#commentDelete");
 const handleClickDelete = async (event) => {
 	const videoComment = event.target.parentNode;
 	const videoId = videoContainer.dataset.videoid;
-	const commentId = videoComment.dataset.commentid;
-	const { status } = await fetch(`/api/videos/${videoId}/comment/delete`, {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({ commentId }),
+	const commentId = videoComment.dataset.id;
+	const response = await fetch(`/api/comment/${commentId}/delete`, {
+		method: "DELETE",
 	});
-	if (status === 200) {
+	if (response.status === 200) {
 		videoComment.remove();
 	}
 };
@@ -21,21 +17,21 @@ const handleClickDelete = async (event) => {
 const addComment = (text, id) => {
 	const videoComments = document.querySelector(".video__comments ul");
 	const newComment = document.createElement("li");
-	newComment.className = "video__comment";
 	// insert data set in fake comment tag
-	newComment.setAttribute("data-commentId", id);
+	newComment.dataset.id = id;
+	newComment.className = "video__comment";
 	const icon = document.createElement("i");
 	icon.className = "fas fa-comment";
 	const span = document.createElement("span");
 	span.innerText = `  ${text}`;
-	const button = document.createElement("button");
-	button.id = "commentDelete";
-	button.innerText = "❌";
+	const span2 = document.createElement("span");
+	span2.id = "commentDelete";
+	span2.innerText = "❌";
 	// before sync, need eventlistener
-	button.addEventListener("click", handleClickDelete);
+	span2.addEventListener("click", handleClickDelete);
 	newComment.appendChild(icon);
 	newComment.appendChild(span);
-	newComment.appendChild(button);
+	newComment.appendChild(span2);
 	videoComments.prepend(newComment);
 };
 
@@ -54,12 +50,11 @@ const handleSubmit = async (event) => {
 		},
 		body: JSON.stringify({ text }),
 	}); // fetch :: send request to backend
-	const { status } = response;
-	const result = await response.json(); // fetch promise need await
-	if (status === 201) {
-		addComment(text, result.id);
+	if (response.status === 201) {
+		textarea.value = "";
+		const { newCommentId } = await response.json();
+		addComment(text, newCommentId);
 	}
-	textarea.value = "";
 };
 
 if (form) {

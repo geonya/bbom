@@ -16,22 +16,22 @@ app.set("view engine", "pug");
 app.set("views", process.cwd() + "/src/views");
 
 app.use((_, res, next) => {
-  res.header("Cross-Origin-Embedder-Policy", "require-corp");
-  res.header("Cross-Origin-Opener-Policy", "same-origin");
-  next();
+	res.header("Cross-Origin-Embedder-Policy", "require-corp");
+	res.header("Cross-Origin-Opener-Policy", "same-origin");
+	next();
 });
 app.use(logger);
 app.use(express.urlencoded({ extended: true })); // req.body
 app.use(express.json()); // text 가 아닌 json 으로 보낸다고 알려줘야함
 app.use(
-  session({
-    secret: process.env.COOKIE_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({
-      mongoUrl: process.env.DB_URL,
-    }),
-  })
+	session({
+		secret: process.env.COOKIE_SECRET,
+		resave: false,
+		saveUninitialized: false,
+		store: MongoStore.create({
+			mongoUrl: process.env.DB_URL,
+		}),
+	})
 );
 app.use(flash());
 app.use(localsMiddleware);

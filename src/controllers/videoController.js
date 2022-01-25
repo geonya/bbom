@@ -1,3 +1,4 @@
+import { response } from "express";
 import req from "express/lib/request";
 import Comment from "../models/Comment";
 import User from "../models/User";
@@ -95,7 +96,16 @@ export const deleteVideo = async (req, res) => {
 	if (String(video.owner) !== String(_id)) {
 		return res.redirect("/");
 	}
-	await Video.findByIdAndRemove(id);
+	await User.findByIdAndUpdate(_id, {
+		$pull: { videos: { $in: [video._id] } },
+	});
+	await User.findByIdAndUpdate(_id, {
+		$pull: {
+			comments: { $in: video.comments },
+		},
+	});
+	await Comment.deleteMany({ video: video._id });
+	await video.findByIdAndRemove(id);
 	return res.redirect("/");
 };
 
@@ -179,6 +189,7 @@ export const createComment = async (req, res) => {
 		return res.sendStatus(404); // send and kill request
 	}
 	const dbUser = await User.findById({ _id: user._id });
+	console.log(dbUser);
 	const comment = await Comment.create({
 		text,
 		owner: user._id,
@@ -188,22 +199,31 @@ export const createComment = async (req, res) => {
 	dbUser.comments.push(comment._id);
 	await video.save();
 	await dbUser.save();
-	return res.status(201).json({ id: comment._id });
+	return res.status(201).json({ newCommentId: comment._id });
 };
 
 export const deleteComment = async (req, res) => {
 	const {
 		params: { id },
-		body: { commentId },
+		session: {
+			user: { _id: userId },
+		},
 	} = req;
-	const video = await Video.findById(id);
-	if (!video) {
-		return res.sendStatus(404);
-	}
-	const comment = await Comment.findById({ _id: commentId });
+	const comment = await Comment.findById({ _id: id });
+	const user = await User.findById({ _id: comment.owner });
+	const video = await Video.findById({ _id: comment.video });
 	if (!comment) {
 		return res.sendStatus(404);
 	}
-	await Comment.findByIdAndRemove({ _id: commentId });
+	if (String(comment.owner) !== String(userId)) {
+		req.flash("error", "You are not the owner of this comment.");
+		return res.sendStatus(404);
+	}
+
+	await user.comments.pull(comment._id);
+	await user.save();
+	await video.comments.pull(comment._id);
+	await video.save();
+	await Comment.findByIdAndRemove(comment._id);
 	return res.sendStatus(200);
 };
