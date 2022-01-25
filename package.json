@@ -3,8 +3,12 @@
 	"version": "1.0.0",
 	"description": "I LOVE BBO",
 	"scripts": {
+		"start": "node build/init.js",
+		"build": "npm run build:server && npm run build:assets",
+		"build:server": "babel src -d build",
+		"build:assets": "webpack --mode=production",
 		"dev:server": "nodemon",
-		"dev:assets": "webpack"
+		"dev:assets": "webpack --mode=development -w"
 	},
 	"dependencies": {
 		"@ffmpeg/core": "^0.10.0",
@@ -22,7 +26,8 @@
 		"pug": "^3.0.2"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.16.7",
+		"@babel/cli": "^7.16.8",
+		"@babel/core": "^7.16.12",
 		"@babel/node": "^7.16.8",
 		"@babel/preset-env": "^7.16.8",
 		"babel-loader": "^8.2.3",
