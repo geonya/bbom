@@ -16,7 +16,7 @@ nav
             li
                 a(href=`/users/${loggedInUser._id}`) Profile
                     if isHeroku
-                        img.header__avatar(src=loggedInUser.avatarUrl)
+                        img.header__avatar(src=loggedInUser.avatarUrl crossorigin)
                     else 
                         img.header__avatar(src="/"+loggedInUser.avatarUrl)
             li#logout
