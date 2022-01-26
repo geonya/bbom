@@ -5,7 +5,7 @@ block content
         if isHeroku
             video(src=video.fileUrl crossorigin)
         else
-            video(src="/"+video.fileUrl crossorigin)
+            video(src="/"+video.fileUrl)
         div#videoControls.videoControls
             div.controls__top
                 input(type="range", step="1", value="0", min="0")#timeline
