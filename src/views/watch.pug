@@ -2,7 +2,10 @@ extends base
 
 block content
     div#videoContainer(data-videoId=video._id tabindex="0")
-        video(src=video.fileUrl crossorigin)
+        if isHeroku
+            video(src=video.fileUrl crossorigin)
+        else
+            video(src="/"+video.fileUrl crossorigin)
         div#videoControls.videoControls
             div.controls__top
                 input(type="range", step="1", value="0", min="0")#timeline

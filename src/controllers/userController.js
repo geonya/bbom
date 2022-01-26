@@ -14,6 +14,7 @@ export const postJoin = async (req, res) => {
 		body: { userId, name, email, password, password2, location },
 		file,
 	} = req;
+	const isHeroku = process.env.NODE.ENV === "production";
 	let errorMessages = [];
 	const userExists = await User.exists({ userId });
 	if (userExists) {
@@ -37,7 +38,11 @@ export const postJoin = async (req, res) => {
 			email,
 			password,
 			location,
-			avatarUrl: file ? file.location : process.env.AVATAR,
+			avatarUrl: file
+				? isHeroku
+					? file.location
+					: file.path
+				: process.env.AVATAR,
 		});
 		req.session.loggedIn = true;
 		req.session.user = user;
@@ -145,13 +150,18 @@ export const postEdit = async (req, res) => {
 			errorMessage,
 		});
 	}
+	const isHeroku = process.env.NODE.ENV === "production";
 	const updateUser = await User.findByIdAndUpdate(
 		_id,
 		{
 			name,
 			email,
 			location,
-			avatarUrl: file ? file.location : process.env.AVATAR,
+			avatarUrl: file
+				? isHeroku
+					? file.location
+					: file.path
+				: process.env.AVATAR,
 		},
 		{ new: true }
 	);
