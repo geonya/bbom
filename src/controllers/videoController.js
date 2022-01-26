@@ -104,7 +104,7 @@ export const deleteVideo = async (req, res) => {
 	});
 
 	await Comment.deleteMany({ video: video._id });
-	await video.findByIdAndRemove(id);
+	await Video.findByIdAndRemove(id);
 	return res.redirect("/");
 };
 
