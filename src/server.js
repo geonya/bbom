@@ -12,6 +12,12 @@ import apiRouter from "./routers/apiRouter";
 const app = express();
 const logger = morgan("dev");
 
+process.env.NODE_ENV =
+	process.env.NODE_ENV &&
+	process.env.NODE_ENV.trim().toLowerCase() == "production"
+		? "production"
+		: "development";
+
 app.set("view engine", "pug");
 app.set("views", process.cwd() + "/src/views");
 

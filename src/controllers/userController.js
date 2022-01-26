@@ -152,7 +152,6 @@ export const postEdit = async (req, res) => {
 	}
 
 	const isHeroku = process.env.NODE.ENV === "production";
-	console.log(isHeroku);
 	const updateUser = await User.findByIdAndUpdate(
 		_id,
 		{
