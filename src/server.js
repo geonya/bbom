@@ -23,9 +23,15 @@ app.set("views", process.cwd() + "/src/views");
 
 // CORS ERROR
 app.use((_, res, next) => {
+	//v2
+	res.header("Cross-Origin-Embedder-Policy", "credentialless");
 	res.header("Cross-Origin-Opener-Policy", "same-origin");
-	res.header("Cross-Origin-Embedder-Policy", "require-corp");
-	res.header("cross-origin-resource-policy", "cross-origin");
+
+	// v1
+	// res.header("Cross-Origin-Opener-Policy", "same-origin");
+	// res.header("Cross-Origin-Embedder-Policy", "require-corp");
+	// res.header("cross-origin-resource-policy", "cross-origin");
+	// res.header("Access-Control-Allow-Credentials", "true");
 	next();
 });
 
