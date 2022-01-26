@@ -14,7 +14,7 @@ export const postJoin = async (req, res) => {
 		body: { userId, name, email, password, password2, location },
 		file,
 	} = req;
-	const isHeroku = process.env.NODE.ENV === "production";
+	const isHeroku = process.env.NODE_ENV === "production";
 	let errorMessages = [];
 	const userExists = await User.exists({ userId });
 	if (userExists) {
@@ -151,7 +151,7 @@ export const postEdit = async (req, res) => {
 		});
 	}
 
-	const isHeroku = process.env.NODE.ENV === "production";
+	const isHeroku = process.env.NODE_ENV === "production";
 	const updateUser = await User.findByIdAndUpdate(
 		_id,
 		{
