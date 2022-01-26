@@ -97,13 +97,12 @@ export const deleteVideo = async (req, res) => {
 		return res.redirect("/");
 	}
 	await User.findByIdAndUpdate(_id, {
-		$pull: { videos: { $in: [video._id] } },
-	});
-	await User.findByIdAndUpdate(_id, {
 		$pull: {
+			videos: { $in: [video._id] },
 			comments: { $in: video.comments },
 		},
 	});
+
 	await Comment.deleteMany({ video: video._id });
 	await video.findByIdAndRemove(id);
 	return res.redirect("/");
