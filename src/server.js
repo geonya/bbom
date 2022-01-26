@@ -22,7 +22,7 @@ app.use((_, res, next) => {
 	res.header("cross-origin-resource-policy", "cross-origin");
 	next();
 });
-
+console.log(isHeroku);
 app.use(logger);
 app.use(express.urlencoded({ extended: true })); // req.body
 app.use(express.json()); // text 가 아닌 json 으로 보낸다고 알려줘야함
