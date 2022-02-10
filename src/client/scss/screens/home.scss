@@ -1,0 +1,15 @@
+.hidden {
+	display: none;
+}
+
+@media screen and (max-width: 1300px) {
+	.video-grid {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+@media screen and (max-width: 700px) {
+	.video-grid {
+		grid-template-columns: 1fr;
+		width: 100%;
+	}
+}

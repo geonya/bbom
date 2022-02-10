@@ -1,58 +1,69 @@
 extends base
 
 block content
-    div#videoContainer(data-videoId=video._id tabindex="0")
-        if isHeroku
-            video(src=video.fileUrl crossorigin)
-        else
-            video(src=video.fileUrl)
-        div#videoControls.videoControls
-            div.controls__top
-                input(type="range", step="1", value="0", min="0")#timeline
-            div.controls__bottom
-                div.controls__play
-                    button#play
-                        i.fas.fa-play
-                    button#stepForward
-                        i.fas.fa-step-forward
-                div.controls__time
-                    span#currentTime 00:00
-                    span  |  
-                    span#totalTime 00:00
-                div.controls__volume
-                    button#mute
-                        i.fas.fa-volume-up
-                    input(type="range", step="0.1", value="0.5", min="0", max="1")#volume
-                
-                div.controls__screen
-                    button#fullscreenBtn
-                        i.fas.fa-expand
-
-    div.video__data
-        p.video__title=video.description
-        small.video__owner Uploaded by 
-            a(href=`/users/${video.owner.id}`)=video.owner.name
-        small.video.createdAt=new Date(video.createdAt).toLocaleDateString("ko")
-    if loggedIn
-        if String(video.owner._id) === String(loggedInUser._id)
-            a(href=`${video.id}/edit`) Edit Video &rarr;
-            br
-            a(href=`${video.id}/delete`) Delete Video &rarr;
-    if loggedIn
-        div.video__add-comments
-            form.video__comment-form#commentForm()
-                textarea(cols="30", rows="10", placeholder="Write a nice comment...")
-                button Add Comment
-    div.video__comments
-        ul 
-            each comment in video.comments.reverse()
-                li.video__comment(data-id=comment._id)
-                    i.fas.fa-comment
-                    span #{comment.text}
-                    if loggedIn
-                        if String(loggedInUser._id) === String(comment.owner)
-                            span#commentDelete ❌
+    div.watch-wrapper
+        
+        div#videoContainer(data-videoId=video._id tabindex="0")
+            if isHeroku
+                video(src=video.fileUrl crossorigin)
+            else
+                video(src="/"+video.fileUrl)
+            div#videoControls.videoControls
+                div.controls__top
+                    input(type="range", step="1", value="0", min="0")#timeline
+                div.controls__bottom
+                    div.controls__play
+                        button#play
+                            i.fas.fa-play
+                        button#stepForward
+                            i.fas.fa-step-forward
+                    div.controls__time
+                        span#currentTime 00:00
+                        span  |  
+                        span#totalTime 00:00
+                    div.controls__volume
+                        button#mute
+                            i.fas.fa-volume-up
+                        input(type="range", step="0.1", value="0.5", min="0", max="1")#volume
                     
+                    div.controls__screen
+                        button#fullscreenBtn
+                            i.fas.fa-expand
+    
+        div.video__data-top
+            div.video__owner
+                img.header__avatar(src="/"+video.owner.avatarUrl)
+                a(href=`/users/${video.owner.id}`)=video.owner.name
+            span.video__title=video.title
+            span.video__createdAt=new Date(video.createdAt).toLocaleDateString("ko")
+        div.video__data-bottom
+            
+            span #{video.description}
+        
+        div.video__edit
+            if loggedIn
+                if String(video.owner._id) === String(loggedInUser._id)
+                    button
+                        a(href=`${video.id}/edit`) Edit Video &rarr;
+                    br
+                    button
+                        a(href=`${video.id}/delete`) Delete Video &rarr;
+        if loggedIn
+            div.video__add-comments
+                img.header__avatar(src="/"+video.owner.avatarUrl)
+                form.video__comment-form#commentForm()
+                    input(placeholder="Write a nice comment...")
+                    button Post Comment
+        div.video__comments
+            ul 
+                each comment in video.comments.reverse()
+                    li.video__comment(data-id=comment._id)
+                        i.fas.fa-comment
+                        span #{comment.text}
+                        if loggedIn
+                            if String(loggedInUser._id) === String(comment.owner)
+                                span#commentDelete ❌
+                        
 block scripts
     script(src="/static/js/videoPlayer.js") 
     if loggedIn
