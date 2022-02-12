@@ -1,6 +1,6 @@
 mixin video(video)
     a(href=`/videos/${video._id}`).video-mixin
-        div.video-mixin__thumb(style=`background-image:url(${"/"+video.thumbUrl});background-size:cover;background-position:center;background-image-crossorigin: "use-credentials";`)
+        div.video-mixin__thumb(style=`background-image:url(${video.thumbUrl});background-size:cover;background-position:center;background-image-crossorigin: "use-credentials";`)
         div.video-mixin__data
             div 
                 img.header__avatar(src="/"+video.owner.avatarUrl)

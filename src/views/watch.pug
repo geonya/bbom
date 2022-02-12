@@ -55,7 +55,7 @@ block content
                         a(href=`${video.id}/delete`) Delete
         if loggedIn
             div.video__add-comments
-                img.header__avatar(src="/"+video.owner.avatarUrl)
+                img.header__avatar(src=video.owner.avatarUrl)
                 form.video__comment-form#commentForm()
                     input(placeholder="Write a nice comment...")
                     button Post Comment
@@ -64,7 +64,7 @@ block content
                 each comment in video.comments.reverse()
                     li.video__comment(data-id=comment._id)
                         div
-                            img.header__avatar(src="/"+comment.ownerAvatar)
+                            img.header__avatar(src=comment.ownerAvatar)
                             span #{comment.ownerName}
                         span #{comment.text}
                         if loggedIn
