@@ -2,6 +2,9 @@
 	"name": "bbotube",
 	"version": "1.0.0",
 	"description": "I LOVE BBO",
+	"engines": {
+		"node": "16.x"
+	},
 	"scripts": {
 		"start": "node build/init.js",
 		"build": "npm run build:server && npm run build:assets",
