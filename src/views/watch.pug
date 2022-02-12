@@ -6,8 +6,11 @@ block content
             div.video__owner
                 img.header__avatar(src="/"+video.owner.avatarUrl)
                 a(href=`/users/${video.owner.id}`)=video.owner.name
+                button Follow
             span.video__title=video.title
-            span.video__createdAt=new Date(video.createdAt).toLocaleDateString("ko")
+            div.video__meta-data
+                span.video__createdAt=new Date(video.createdAt).toLocaleDateString("ko")
+                span.video__views #{video.meta.views} views
         div#videoContainer(data-videoId=video._id tabindex="0")
             if isHeroku
                 video(src=video.fileUrl crossorigin)
@@ -37,19 +40,19 @@ block content
     
        
         div.video__data-bottom
-            span #{video.description}
+            span.video__data__description #{video.description}
             div.video__data__hashtags
                 each hashtag in video.hashtags
-                    span.video__data__hashtag=hashtag
+                    a(href="#").video__data__hashtag=hashtag
         
         div.video__edit
             if loggedIn
                 if String(video.owner._id) === String(loggedInUser._id)
                     button
-                        a(href=`${video.id}/edit`) Edit Video &rarr;
+                        a(href=`${video.id}/edit`) Edit
                     br
                     button
-                        a(href=`${video.id}/delete`) Delete Video &rarr;
+                        a(href=`${video.id}/delete`) Delete
         if loggedIn
             div.video__add-comments
                 img.header__avatar(src="/"+video.owner.avatarUrl)
@@ -60,7 +63,9 @@ block content
             ul 
                 each comment in video.comments.reverse()
                     li.video__comment(data-id=comment._id)
-                        i.fas.fa-comment
+                        div
+                            img.header__avatar(src="/"+comment.ownerAvatar)
+                            span #{comment.ownerName}
                         span #{comment.text}
                         if loggedIn
                             if String(loggedInUser._id) === String(comment.owner)

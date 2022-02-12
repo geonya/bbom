@@ -8,6 +8,8 @@ const commentSchema = new mongoose.Schema({
 		required: true,
 		ref: "User",
 	},
+	ownerAvatar: { type: String },
+	ownerName: { type: String },
 	video: {
 		type: mongoose.Schema.Types.ObjectId,
 		required: true,

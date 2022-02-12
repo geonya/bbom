@@ -14,22 +14,27 @@ const handleClickDelete = async (event) => {
 	}
 };
 
-const addComment = (text, id) => {
+const addComment = (text, id, avatar, name) => {
 	const videoComments = document.querySelector(".video__comments ul");
 	const newComment = document.createElement("li");
-	// insert data set in fake comment tag
 	newComment.dataset.id = id;
 	newComment.className = "video__comment";
-	const icon = document.createElement("i");
-	icon.className = "fas fa-comment";
+	// comment user avatar
+	const div = document.createElement("div");
+	const img = document.createElement("img");
+	const nameSpan = document.createElement("span");
+	img.className = "header__avatar";
+	img.src = "/" + avatar;
+	nameSpan.innerText = name;
+	div.appendChild(img);
+	div.appendChild(nameSpan);
 	const span = document.createElement("span");
 	span.innerText = `  ${text}`;
 	const span2 = document.createElement("span");
 	span2.id = "commentDelete";
 	span2.innerText = "❌";
-	// before sync, need eventlistener
 	span2.addEventListener("click", handleClickDelete);
-	newComment.appendChild(icon);
+	newComment.appendChild(div);
 	newComment.appendChild(span);
 	newComment.appendChild(span2);
 	videoComments.prepend(newComment);
@@ -52,14 +57,13 @@ const handleSubmit = async (event) => {
 	}); // fetch :: send request to backend
 	if (response.status === 201) {
 		textarea.value = "";
-		const { newCommentId } = await response.json();
-		addComment(text, newCommentId);
+		const { newCommentId, ownerAvatar, ownerName } = await response.json();
+		addComment(text, newCommentId, ownerAvatar, ownerName);
 	}
 };
 
 if (form) {
 	// if login ?
-	// better than click event
 	form.addEventListener("submit", handleSubmit);
 	// need loop adding eventlistener for all btns
 	for (const btn of deleteBtns) {

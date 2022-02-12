@@ -18,18 +18,21 @@ export const postJoin = async (req, res) => {
 	let errorMessages = [];
 	const userExists = await User.exists({ userId });
 	if (userExists) {
+		req.flash("error", "ID is already taken");
 		errorMessages.push("ID is already taken");
 	}
 	const emailExists = await User.exists({ email });
 	if (emailExists) {
+		req.flash("error", "Email is already taken");
 		errorMessages.push("Email is already taken");
 	}
 	if (password === "" || password !== password2) {
 		// password is not required so not allowed empty
+		req.flash("error", "Password confirmation is wrong.");
 		errorMessages.push("Password confirmation is wrong.");
 	}
 	if (errorMessages.length > 0) {
-		return res.render("join", { pageTitle, errorMessages });
+		return res.render("join", { pageTitle });
 	}
 	try {
 		const user = await User.create({
@@ -50,7 +53,6 @@ export const postJoin = async (req, res) => {
 	} catch (error) {
 		return res.status(400).render("join", {
 			pageTitle,
-			errorMessage: error._message,
 		});
 	}
 };
@@ -68,13 +70,14 @@ export const postLogin = async (req, res) => {
 	try {
 		const user = await User.findOne({ userId });
 		if (!user) {
-			errorMessages.push("User does not exsists");
+			req.flash("error", "User does not exsists");
 		}
 		if (user.socialOnly) {
 			return res.redirect("/users/github/start");
 		}
 		const match = await bcrypt.compare(password, user.password);
 		if (!match) {
+			req.flash("error", "Password is not correct");
 			errorMessages.push("Password is not correct");
 		}
 		if (errorMessages.length > 0) {
@@ -87,7 +90,6 @@ export const postLogin = async (req, res) => {
 	} catch (error) {
 		return res.status(400).render("login", {
 			pageTitle,
-			errorMessages: error._message,
 		});
 	}
 };

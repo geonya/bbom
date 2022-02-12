@@ -31,7 +31,8 @@ export const watch = async (req, res) => {
 			errorMessage: "Video does not exsists",
 		});
 	}
-	return res.render("watch", { pageTitle: video.title, video });
+	const comments = await Comment.find({ video: video._id });
+	return res.render("watch", { pageTitle: video.title, video, comments });
 };
 
 export const getEdit = async (req, res) => {
@@ -189,17 +190,22 @@ export const createComment = async (req, res) => {
 		return res.sendStatus(404); // send and kill request
 	}
 	const dbUser = await User.findById({ _id: user._id });
-	console.log(dbUser);
 	const comment = await Comment.create({
 		text,
 		owner: user._id,
+		ownerAvatar: user.avatarUrl,
+		ownerName: user.name,
 		video: id,
 	});
 	video.comments.push(comment._id);
 	dbUser.comments.push(comment._id);
 	await video.save();
 	await dbUser.save();
-	return res.status(201).json({ newCommentId: comment._id });
+	return res.status(201).json({
+		newCommentId: comment._id,
+		ownerAvatar: user.avatarUrl,
+		ownerName: user.name,
+	});
 };
 
 export const deleteComment = async (req, res) => {

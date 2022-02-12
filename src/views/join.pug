@@ -1,10 +1,8 @@
 extends base 
 
 block content 
-    if errorMessages
-        each errorMessage in errorMessages
-            p=errorMessage
-    form(method="POST", enctype="multipart/form-data")
+    h1#joinTitle Join
+    form.join(method="POST", enctype="multipart/form-data")
         label(for="avatar") Avatar
         input(type="file", id="avatar", name="avatar", accept="image/*")
         input(type="text", name="userId", placeholder="ID")
@@ -13,7 +11,7 @@ block content
         input(type="password", name="password", placeholder="PASSWORD")
         input(type="password", name="password2", placeholder="PASSWORD CONFIRM")
         input(type="text", name="location", placeholder="LOCATION")
-        input(type="submit", value="Create Account")
+        button Create Account
         include partials/social-login
         div.auth-switch
             span Already Have an Account? 

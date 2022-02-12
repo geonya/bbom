@@ -7,6 +7,7 @@ form {
 	box-shadow: 0 10px 15px rgba(50, 50, 93, 0.11),
 		0 1px 3px rgba(0, 0, 0, 0.08);
 }
+
 input {
 	all: unset;
 	padding: 15px 20px;
@@ -23,12 +24,18 @@ input {
 }
 input[type="submit"],
 .social__btn {
+	all: unset;
+	margin: 10px auto;
 	display: block;
+	width: 50%;
+	background-color: $purple;
+	color: white;
 	padding: 12px 20px;
 	text-align: center;
 	cursor: pointer;
 	border-radius: 10px;
-	background-color: aliceblue;
+	box-shadow: 0 10px 15px rgba(50, 50, 93, 0.11),
+		0 1px 3px rgba(0, 0, 0, 0.08);
 	&:active {
 		transform: translateY(1px);
 	}
@@ -36,12 +43,15 @@ input[type="submit"],
 
 button {
 	all: unset;
+	margin: 10px auto;
 	display: block;
+	width: 50%;
+	background-color: $purple;
+	color: white;
 	padding: 12px 20px;
 	text-align: center;
 	cursor: pointer;
 	border-radius: 10px;
-	background-color: aliceblue;
 	box-shadow: 0 10px 15px rgba(50, 50, 93, 0.11),
 		0 1px 3px rgba(0, 0, 0, 0.08);
 	&:active {

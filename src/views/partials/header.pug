@@ -1,8 +1,10 @@
-header     
+header
+    h1 Catch the movement.
+    video(autoplay muted loop id="bg-video")
+        source(src="/uploads/videos/header-video.mp4" type="video/mp4")  
     section
         div.search-bar__container
             form(method="GET" action="/search")
-                input(type="text", name="keyword", placeholder="Searching by video title",requried)
+                input(type="text", name="keyword", placeholder="Searching by video title" requried autocomplete="off")
                 button
                     i.fas.fa-search
-            
