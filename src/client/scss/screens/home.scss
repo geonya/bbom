@@ -3,11 +3,33 @@
 }
 
 @media screen and (max-width: 1300px) {
+	header {
+		section {
+			.search-bar__container {
+				form {
+					width: 70%;
+				}
+			}
+		}
+	}
 	.video-grid {
 		grid-template-columns: 1fr 1fr;
 	}
 }
 @media screen and (max-width: 700px) {
+	nav {
+		padding: 20px 10px;
+		font-size: 12px;
+	}
+	header {
+		section {
+			.search-bar__container {
+				form {
+					width: 90%;
+				}
+			}
+		}
+	}
 	.video-grid {
 		grid-template-columns: 1fr;
 		width: 100%;

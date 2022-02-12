@@ -2,4 +2,35 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	margin-top: 100px;
+	margin-bottom: 20px;
+	button {
+		margin: 20px 0;
+		background-color: #e74c3c;
+		color: white;
+	}
+}
+
+.upload-form {
+	color: #95a5a6;
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	label {
+		margin: 10px;
+	}
+	input {
+		max-width: 600px;
+		min-width: 300px;
+		color: black;
+		margin-bottom: 20px;
+	}
+
+	#uploadInput {
+		width: 30%;
+		margin: 10px 0;
+		background-color: #e74c3c;
+		color: white;
+	}
 }

@@ -10,6 +10,7 @@
 @import "./components/footer.scss";
 @import "./components/form.scss";
 @import "./components/social-login.scss";
+@import "./components/video-player.scss";
 
 // screens
 @import "./screens/home.scss";
@@ -39,7 +40,10 @@ body {
 }
 
 main {
-	margin-top: 100px;
+	padding-bottom: 100px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 @keyframes topNoti {
@@ -54,7 +58,7 @@ main {
 }
 
 .message {
-	z-index: 100;
+	z-index: 5000;
 	text-align: center;
 	position: fixed;
 	left: 0;

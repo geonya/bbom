@@ -1,7 +1,8 @@
-header    
-    
+header     
     section
-        div.search-bar__container(autocomplete="false")
-            input
-            button
-                i.fas.fa-search
+        div.search-bar__container
+            form(method="GET" action="/search")
+                input(type="text", name="keyword", placeholder="Searching by video title",requried)
+                button
+                    i.fas.fa-search
+            

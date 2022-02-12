@@ -2,7 +2,12 @@ extends base
 
 block content
     div.watch-wrapper
-        
+        div.video__data-top
+            div.video__owner
+                img.header__avatar(src="/"+video.owner.avatarUrl)
+                a(href=`/users/${video.owner.id}`)=video.owner.name
+            span.video__title=video.title
+            span.video__createdAt=new Date(video.createdAt).toLocaleDateString("ko")
         div#videoContainer(data-videoId=video._id tabindex="0")
             if isHeroku
                 video(src=video.fileUrl crossorigin)
@@ -30,15 +35,12 @@ block content
                         button#fullscreenBtn
                             i.fas.fa-expand
     
-        div.video__data-top
-            div.video__owner
-                img.header__avatar(src="/"+video.owner.avatarUrl)
-                a(href=`/users/${video.owner.id}`)=video.owner.name
-            span.video__title=video.title
-            span.video__createdAt=new Date(video.createdAt).toLocaleDateString("ko")
+       
         div.video__data-bottom
-            
             span #{video.description}
+            div.video__data__hashtags
+                each hashtag in video.hashtags
+                    span.video__data__hashtag=hashtag
         
         div.video__edit
             if loggedIn
