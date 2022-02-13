@@ -6,6 +6,7 @@ block content
         button#actionBtn Start Recording
     if errorMessage 
         span#erroMessage=errorMessage
+    h1#pageTitle Upload video
     form.upload-form(method="POST", enctype="multipart/form-data", required)
         label(for="video") Upload File
         input(type="file", id="video", name="video", accept="video/*", required)

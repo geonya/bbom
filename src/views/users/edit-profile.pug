@@ -5,14 +5,15 @@ block content
         ul
         each error in errorMessage
             li#errorMessage=error
-    div.profile__data
-        img(src=loggedInUser.avatarUrl).avatar
-        h3=loggedInUser.name
-    form(method="POST", enctype="multipart/form-data").edit-profile__form
-        label(for="avatar") Avatar
-        input(type="file", id="avatar", name="avatar", accept="image/*")
-        input(type="text", name="name", placeholder="NAME", value=`${loggedInUser.name}`)
-        input(type="email", name="email", placeholder="E-MAIL", value=`${loggedInUser.email}`)
-        input(type="text", name="location", placeholder="LOCATION", value=`${loggedInUser.location}`)
-        button Edit Profile
-    
+    div.edit-profile
+        div.profile__data
+            img(src=loggedInUser.avatarUrl).avatar
+            h3=loggedInUser.name
+        form(method="POST", enctype="multipart/form-data").edit-profile__form
+            label(for="avatar") Avatar
+            input(type="file", id="avatar", name="avatar", accept="image/*")
+            input(type="text", name="name", placeholder="NAME", value=`${loggedInUser.name}`)
+            input(type="email", name="email", placeholder="E-MAIL", value=`${loggedInUser.email}`)
+            input(type="text", name="location", placeholder="LOCATION", value=`${loggedInUser.location}`)
+            button Edit Profile
+        
