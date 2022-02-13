@@ -20,7 +20,7 @@ block content
                 div.controls__bottom
                     div.controls__play
                         button#play
-                            i.fas.fa-play
+                            i.fas.fa-pause
                         button#stepForward
                             i.fas.fa-step-forward
                     div.controls__time
@@ -53,7 +53,7 @@ block content
                         a(href=`${video.id}/delete`) Delete
         if loggedIn
             div.video__add-comments
-                img.header__avatar(src=video.owner.avatarUrl)
+                img.header__avatar(src=loggedInUser.avatarUrl)
                 form.video__comment-form#commentForm()
                     input(placeholder="Write a nice comment...")
                     button Post Comment
