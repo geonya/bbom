@@ -4,7 +4,7 @@ header {
 		min-width: 11px;
 		white-space: nowrap;
 		position: absolute;
-		color: $purple;
+		color: gainsboro;
 		color: transparent;
 		top: 200px;
 		left: 50%;
@@ -18,7 +18,7 @@ header {
 		left: 0;
 		width: 100%;
 		height: 100%;
-		color: $purple;
+		color: gainsboro;
 		overflow: hidden;
 		border-right: 5px solid $purple;
 		animation: typing 5s steps(30) infinite;
