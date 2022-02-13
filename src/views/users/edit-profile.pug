@@ -4,7 +4,7 @@ block content
     if errorMessage
         ul
         each error in errorMessage
-            li=error
+            li#errorMessage=error
     div.profile__data
         img(src=loggedInUser.avatarUrl).avatar
         h3=loggedInUser.name

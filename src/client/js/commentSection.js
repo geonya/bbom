@@ -24,7 +24,7 @@ const addComment = (text, id, avatar, name) => {
 	const img = document.createElement("img");
 	const nameSpan = document.createElement("span");
 	img.className = "header__avatar";
-	img.src = "/" + avatar;
+	img.src = avatar;
 	nameSpan.innerText = name;
 	div.appendChild(img);
 	div.appendChild(nameSpan);

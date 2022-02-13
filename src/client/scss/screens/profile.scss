@@ -12,6 +12,9 @@
 		margin-top: 50px;
 		margin-bottom: 20px;
 		img {
+			width: 150px;
+			height: 150px;
+			border-radius: 50%;
 			margin-bottom: 10px;
 		}
 		h3 {
@@ -37,5 +40,9 @@
 		width: 150px;
 		height: 150px;
 		border-radius: 50%;
+	}
+	#errorMessage {
+		font-size: 25px;
+		margin: 0 auto;
 	}
 }
