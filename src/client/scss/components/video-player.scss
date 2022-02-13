@@ -1,13 +1,15 @@
 #videoContainer {
 	position: relative;
-	width: 320px;
+	width: 400px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	video {
-		width: auto;
+		width: 400px;
+		object-fit: fill;
 	}
 }
+
 .videoControls {
 	color: white;
 	opacity: 0;

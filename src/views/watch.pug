@@ -12,10 +12,8 @@ block content
                 span.video__createdAt=new Date(video.createdAt).toLocaleDateString("ko")
                 span.video__views #{video.meta.views} views
         div#videoContainer(data-videoId=video._id tabindex="0")
-            if isHeroku
-                video(src=video.fileUrl crossorigin)
-            else
-                video(src=video.fileUrl  crossorigin)
+            video(autoplay muted loop id="bg-video")
+                source(src=video.fileUrl crossorigin type="video/mp4")  
             div#videoControls.videoControls
                 div.controls__top
                     input(type="range", step="1", value="0", min="0")#timeline
