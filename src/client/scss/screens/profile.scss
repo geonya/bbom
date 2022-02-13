@@ -1,21 +1,41 @@
-.profile__data {
+.edit-profile {
+	width: 100%;
 	color: white;
-	max-width: 420px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin-top: 150px;
-	margin-bottom: 100px;
-	img {
-		margin-bottom: 10px;
+	.profile__data {
+		color: white;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-top: 50px;
+		margin-bottom: 20px;
+		img {
+			margin-bottom: 10px;
+		}
+		h3 {
+			font-size: 25px;
+		}
 	}
-	h3 {
-		font-size: 18px;
+	.profile__data-edit {
+		display: flex;
+		margin-bottom: 50px;
+		#editBtn {
+			width: 65px;
+			height: 20px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		#editBtn:first-child {
+			margin-right: 20px;
+		}
 	}
-}
 
-.avatar {
-	width: 150px;
-	height: 150px;
-	border-radius: 50%;
+	.avatar {
+		width: 150px;
+		height: 150px;
+		border-radius: 50%;
+	}
 }
