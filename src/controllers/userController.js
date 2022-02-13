@@ -168,6 +168,7 @@ export const postEdit = async (req, res) => {
 		},
 		{ new: true }
 	);
+
 	req.session.user = updateUser;
 	return res.redirect(`/users/${updateUser._id}`);
 };

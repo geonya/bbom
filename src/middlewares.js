@@ -13,13 +13,13 @@ const isHeroku = process.env.NODE_ENV === "production";
 
 const s3ImageUploader = multerS3({
 	s3: s3,
-	bucket: "bbom2022/images",
+	bucket: "bbomtube/images",
 	acl: "public-read",
 });
 
 const s3VideoUploader = multerS3({
 	s3: s3,
-	bucket: "bbom2022/videos",
+	bucket: "bbomtube/videos",
 	acl: "public-read",
 });
 
@@ -54,7 +54,7 @@ export const publicOnlyMiddleware = (req, res, next) => {
 export const avatarUpload = multer({
 	dest: "uploads/avatars/",
 	limits: {
-		fileSize: 300000,
+		fileSize: 3000000,
 	},
 	storage: isHeroku ? s3ImageUploader : undefined,
 });
@@ -62,7 +62,7 @@ export const avatarUpload = multer({
 export const videoUpload = multer({
 	dest: "uploads/videos/",
 	limits: {
-		fileSize: 3000000,
+		fileSize: 30000000,
 	},
 	storage: isHeroku ? s3VideoUploader : undefined,
 });
