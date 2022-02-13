@@ -4,7 +4,7 @@ block content
     div.watch-wrapper
         div.video__data-top
             div.video__owner
-                img.header__avatar(src="/"+video.owner.avatarUrl)
+                img.header__avatar(src=video.owner.avatarUrl)
                 a(href=`/users/${video.owner.id}`)=video.owner.name
                 button Follow
             span.video__title=video.title
@@ -15,7 +15,7 @@ block content
             if isHeroku
                 video(src=video.fileUrl crossorigin)
             else
-                video(src="/"+video.fileUrl)
+                video(src=video.fileUrl  crossorigin)
             div#videoControls.videoControls
                 div.controls__top
                     input(type="range", step="1", value="0", min="0")#timeline
