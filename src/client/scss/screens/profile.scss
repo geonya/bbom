@@ -11,16 +11,16 @@
 		align-items: center;
 		margin-top: 50px;
 		margin-bottom: 20px;
-		img {
+		.avatar {
 			width: 150px;
 			height: 150px;
 			border-radius: 50%;
-			margin-bottom: 10px;
 		}
 		h3 {
 			font-size: 25px;
 		}
 	}
+
 	.profile__data-edit {
 		display: flex;
 		margin-bottom: 50px;
@@ -35,14 +35,10 @@
 			margin-right: 20px;
 		}
 	}
+}
 
-	.avatar {
-		width: 150px;
-		height: 150px;
-		border-radius: 50%;
-	}
-	#errorMessage {
-		font-size: 25px;
-		margin: 0 auto;
-	}
+#changePasswordTitle {
+	font-size: 40px;
+	color: white;
+	margin-bottom: 40px;
 }
